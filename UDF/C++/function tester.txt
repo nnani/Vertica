@@ -1,0 +1,20 @@
+g++ -D HAVE_LONG_INT_64 -I opt/vertica/bin/include -Wall -shared -Wno-unused-value -fPIC -o /home/dbadmin/navin/isaplha.so isalpha.cpp opt/vertica/bin/include/Vertica.cpp
+
+
+g++ -D HAVE_LONG_INT_64  -I /opt/vertica/sdk/include -Wall -shared -Wno-unused-value -fPIC -o home/dbadmin/navin/isalpha.so isalpha.cpp /opt/vertica/sdk/include/Vertica.cpp
+
+
+g++ -D HAVE_LONG_INT_64  -I /opt/vertica/sdk/include -Wall -shared -Wno-unused-value -fPIC -o isnumeric.so isnumeric.cpp /opt/vertica/sdk/include/Vertica.cpp
+
+select version();
+
+\set libfile '\''`pwd`'/build/myudx.so\'';
+
+CREATE LIBRARY EMAILLib as :libfile;
+CREATE FUNCTION EMAIL as language 'C++' name 'EMAILFactory' library EMAILLib;
+
+
+\set libfile '\''`pwd`'/isalpha.so\'';
+create or replace library isalphalib as :libfile
+
+
